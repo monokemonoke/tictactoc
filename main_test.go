@@ -32,53 +32,53 @@ func TestIsValidMove(t *testing.T) {
 }
 
 type PlaceTestCase struct {
-	board  [][]string
+	board  [3][3]string
 	x      int
 	y      int
 	player int
-	expect [][]string
+	expect [3][3]string
 }
 
 var placeTests = []PlaceTestCase{
 	{
-		[][]string{{"  ", "  ", "  "}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
+		[3][3]string{{"  ", "  ", "  "}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
 		1, 1, FirstPlayer,
-		[][]string{{" X", "  ", "  "}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
+		[3][3]string{{" X", "  ", "  "}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
 	},
 	{
-		[][]string{{"  ", "  ", "  "}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
+		[3][3]string{{"  ", "  ", "  "}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
 		1, 1, SecondPlayer,
-		[][]string{{" O", "  ", "  "}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
+		[3][3]string{{" O", "  ", "  "}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
 	},
 	{
-		[][]string{{"  ", "  ", "  "}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
+		[3][3]string{{"  ", "  ", "  "}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
 		2, 1, FirstPlayer,
-		[][]string{{"  ", "  ", "  "}, {" X", "  ", "  "}, {"  ", "  ", "  "}},
+		[3][3]string{{"  ", " X", "  "}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
 	},
 	{
-		[][]string{{"  ", "  ", "  "}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
+		[3][3]string{{"  ", "  ", "  "}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
 		1, 2, FirstPlayer,
-		[][]string{{"  ", " X", "  "}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
+		[3][3]string{{"  ", "  ", "  "}, {" X", "  ", "  "}, {"  ", "  ", "  "}},
 	},
 	{
-		[][]string{{"  ", "  ", "  "}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
+		[3][3]string{{"  ", "  ", "  "}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
 		3, 3, FirstPlayer,
-		[][]string{{"  ", "  ", "  "}, {"  ", "  ", "  "}, {"  ", "  ", " X"}},
+		[3][3]string{{"  ", "  ", "  "}, {"  ", "  ", "  "}, {"  ", "  ", " X"}},
 	},
 	{
-		[][]string{{"  ", "  ", "  "}, {" O", " O", " O"}, {"  ", "  ", "  "}},
+		[3][3]string{{"  ", "  ", "  "}, {" O", " O", " O"}, {"  ", "  ", "  "}},
 		2, 1, FirstPlayer,
-		[][]string{{"  ", "  ", "  "}, {" X", " O", " O"}, {"  ", "  ", "  "}},
+		[3][3]string{{"  ", " X", "  "}, {" O", " O", " O"}, {"  ", "  ", "  "}},
 	},
 	{
-		[][]string{{"  ", "  ", "  "}, {" O", " O", " O"}, {"  ", "  ", "  "}},
+		[3][3]string{{"  ", "  ", "  "}, {" O", " O", " O"}, {"  ", "  ", "  "}},
 		1, 2, FirstPlayer,
-		[][]string{{"  ", " X", "  "}, {" O", " O", " O"}, {"  ", "  ", "  "}},
+		[3][3]string{{"  ", "  ", "  "}, {" X", " O", " O"}, {"  ", "  ", "  "}},
 	},
 }
 
 func TestPlace(t *testing.T) {
-	for _, test := range placeTests {
+	for index, test := range placeTests {
 		actual := Place(test.board, test.x, test.y, test.player)
 
 		if len(actual) != 3 {
@@ -96,7 +96,9 @@ func TestPlace(t *testing.T) {
 		for y := 0; y < 3; y++ {
 			for x := 0; x < 3; x++ {
 				if actual[y][x] != test.expect[y][x] {
-					t.Fatalf("board[%d][%d] should be %s, but actual %s", y, x, test.expect[y][x], actual[y][x])
+					t.Logf("testCase%d\n", index)
+					t.Logf("board[%d][%d] should be %s, but actual %s", y, x, test.expect[y][x], actual[y][x])
+					t.Fatalf("when Place(%+v,%d,%d,%d)\n", test.board, test.y, test.x, test.player)
 				}
 			}
 		}

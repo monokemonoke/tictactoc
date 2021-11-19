@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
 const FirstPlayer = 1
@@ -19,6 +18,7 @@ func main() {
 		x, y := InputPlace(board)
 
 		board = Place(board, x, y, player)
+		ShowBoard(board)
 
 		if player == FirstPlayer {
 			player = SecondPlayer
@@ -28,20 +28,20 @@ func main() {
 	}
 }
 
-func InitBoard() [][]string {
-	board := make([][]string, 3)
+func InitBoard() [3][3]string {
+	var board [3][3]string
 	for i := 0; i < 3; i++ {
-		board[i] = []string{"  ", "  ", "  "}
+		board[i] = [3]string{"  ", "  ", "  "}
 	}
 	return board
 }
 
-func ShowBoard(board [][]string) {
+func ShowBoard(board [3][3]string) {
 	fmt.Println("  |  |  |  ")
 
 	for i, row := range board {
 		fmt.Println("--+--+--+--")
-		line := strings.Join(row, "|")
+		line := fmt.Sprintf("%s|%s|%s", row[0],row[1],row[2],)
 		line = fmt.Sprintf("%d |", i) + line
 		fmt.Println(line)
 	}
@@ -57,7 +57,7 @@ func isValidPlace(x, y int) bool {
 	return true
 }
 
-func InputPlace(board [][]string) (int, int) {
+func InputPlace(board [3][3]string) (int, int) {
 	var x, y int
 	for {
 		fmt.Scanf("%d%d", &x, &y)
@@ -69,7 +69,7 @@ func InputPlace(board [][]string) (int, int) {
 	return x, y
 }
 
-func Place(board [][]string, x, y, player int) [][]string {
+func Place(board [3][3]string, x, y, player int) [3][3]string {
 	var piece string
 	if player == FirstPlayer {
 		piece = " X"
