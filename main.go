@@ -16,6 +16,9 @@ func main() {
 	for {
 		fmt.Printf("Player is %d now\n", player)
 
+		x, y := InputMove(board)
+		fmt.Printf("Valid move is (%d, %d)\n", x, y)
+
 		if player == FirstPlayer {
 			player = SecondPlayer
 		} else {
@@ -41,4 +44,19 @@ func ShowBoard(board [][]string) {
 		line = fmt.Sprintf("%d |", i) + line
 		fmt.Println(line)
 	}
+}
+
+func isValidMove(x, y int) bool {
+	return true
+}
+
+func InputMove(board [][]string) (int, int) {
+	var x, y int
+	for {
+		fmt.Scanf("%d%d", &x, &y)
+		if isValidMove(x, y) {
+			break
+		}
+	}
+	return x, y
 }
