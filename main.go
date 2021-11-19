@@ -5,9 +5,23 @@ import (
 	"strings"
 )
 
+const FirstPlayer = 1
+const SecondPlayer = 2
+
 func main() {
 	board := InitBoard()
 	ShowBoard(board)
+	player := FirstPlayer
+
+	for {
+		fmt.Printf("Player is %d now\n", player)
+
+		if player == FirstPlayer {
+			player = SecondPlayer
+		} else {
+			player = FirstPlayer
+		}
+	}
 }
 
 func InitBoard() [][]string {
