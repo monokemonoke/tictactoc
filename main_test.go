@@ -10,13 +10,14 @@ type isValidMoveTestCase struct {
 
 var isValidMoveTasts = []isValidMoveTestCase{
 	{0, 0, false},
-	{1, 0, true},
-	{0, 1, true},
+	{1, 0, false},
+	{0, 1, false},
 	{1, 1, true},
 	{3, 3, true},
 	{4, 3, false},
 	{3, 4, false},
 	{4, 4, false},
+	{-1, -1, false},
 }
 
 func TestIsValidMove(t *testing.T) {

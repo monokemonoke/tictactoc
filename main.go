@@ -47,6 +47,12 @@ func ShowBoard(board [][]string) {
 }
 
 func isValidMove(x, y int) bool {
+	if x < 1 || 3 < x {
+		return false
+	}
+	if y < 1 || 3 < y {
+		return false
+	}
 	return true
 }
 
