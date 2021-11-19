@@ -17,7 +17,6 @@ func main() {
 		fmt.Printf("Player is %d now\n", player)
 
 		x, y := InputPlace(board)
-		fmt.Printf("Valid move is (%d, %d)\n", x, y)
 
 		Place(board, x, y, player)
 
@@ -65,6 +64,7 @@ func InputPlace(board [][]string) (int, int) {
 		if isValidPlace(x, y) {
 			break
 		}
+		fmt.Println("入力はそれぞれ1から3の間です")
 	}
 	return x, y
 }
