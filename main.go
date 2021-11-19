@@ -41,7 +41,7 @@ func ShowBoard(board [3][3]string) {
 
 	for i, row := range board {
 		fmt.Println("--+--+--+--")
-		line := fmt.Sprintf("%s|%s|%s", row[0],row[1],row[2],)
+		line := fmt.Sprintf("%s|%s|%s", row[0], row[1], row[2])
 		line = fmt.Sprintf("%d |", i) + line
 		fmt.Println(line)
 	}
