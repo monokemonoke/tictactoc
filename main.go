@@ -18,7 +18,7 @@ func main() {
 
 		x, y := InputPlace(board)
 
-		Place(board, x, y, player)
+		board = Place(board, x, y, player)
 
 		if player == FirstPlayer {
 			player = SecondPlayer
@@ -69,7 +69,7 @@ func InputPlace(board [][]string) (int, int) {
 	return x, y
 }
 
-func Place(board [][]string, x, y, player int) {
+func Place(board [][]string, x, y, player int) [][]string {
 	var piece string
 	if player == FirstPlayer {
 		piece = " X"
@@ -77,5 +77,6 @@ func Place(board [][]string, x, y, player int) {
 		piece = " O"
 	}
 
-	board[y][x] = piece
+	board[y-1][x-1] = piece
+	return board
 }
