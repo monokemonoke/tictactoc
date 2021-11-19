@@ -19,6 +19,8 @@ func main() {
 		x, y := InputPlace(board)
 		fmt.Printf("Valid move is (%d, %d)\n", x, y)
 
+		Place(board, x, y, player)
+
 		if player == FirstPlayer {
 			player = SecondPlayer
 		} else {
@@ -65,4 +67,15 @@ func InputPlace(board [][]string) (int, int) {
 		}
 	}
 	return x, y
+}
+
+func Place(board [][]string, x, y, player int) {
+	var piece string
+	if player == FirstPlayer {
+		piece = " X"
+	} else {
+		piece = " O"
+	}
+
+	board[y][x] = piece
 }
