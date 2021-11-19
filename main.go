@@ -16,7 +16,7 @@ func main() {
 	for {
 		fmt.Printf("Player is %d now\n", player)
 
-		x, y := InputMove(board)
+		x, y := InputPlace(board)
 		fmt.Printf("Valid move is (%d, %d)\n", x, y)
 
 		if player == FirstPlayer {
@@ -46,7 +46,7 @@ func ShowBoard(board [][]string) {
 	}
 }
 
-func isValidMove(x, y int) bool {
+func isValidPlace(x, y int) bool {
 	if x < 1 || 3 < x {
 		return false
 	}
@@ -56,11 +56,11 @@ func isValidMove(x, y int) bool {
 	return true
 }
 
-func InputMove(board [][]string) (int, int) {
+func InputPlace(board [][]string) (int, int) {
 	var x, y int
 	for {
 		fmt.Scanf("%d%d", &x, &y)
-		if isValidMove(x, y) {
+		if isValidPlace(x, y) {
 			break
 		}
 	}

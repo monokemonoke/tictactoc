@@ -2,13 +2,13 @@ package main
 
 import "testing"
 
-type isValidMoveTestCase struct {
+type isValidPlaceTestCase struct {
 	x      int
 	y      int
 	expect bool
 }
 
-var isValidMoveTasts = []isValidMoveTestCase{
+var isValidPlaceTasts = []isValidPlaceTestCase{
 	{0, 0, false},
 	{1, 0, false},
 	{0, 1, false},
@@ -21,8 +21,8 @@ var isValidMoveTasts = []isValidMoveTestCase{
 }
 
 func TestIsValidMove(t *testing.T) {
-	for _, test := range isValidMoveTasts {
-		actual := isValidMove(test.x, test.y)
+	for _, test := range isValidPlaceTasts {
+		actual := isValidPlace(test.x, test.y)
 		if actual != test.expect {
 			t.Fatalf("isValidMove(%d, %d) expects %t, but got %t\n", test.x, test.y, test.expect, actual)
 		}
