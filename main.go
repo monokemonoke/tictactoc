@@ -4,21 +4,23 @@ import (
 	"fmt"
 )
 
-const FirstPlayer = 1
-const SecondPlayer = 2
+const (
+	FirstPlayer  = 1
+	SecondPlayer = 2
+)
 
 func main() {
-	board := InitBoard()
-	ShowBoard(board)
+	board := initBoard()
+	showBoard(board)
 	player := FirstPlayer
 
 	for {
 		fmt.Printf("Player is %d now\n", player)
 
-		x, y := InputPlace(board)
+		x, y := inputPlace(board)
 
-		board = Place(board, x, y, player)
-		ShowBoard(board)
+		board = place(board, x, y, player)
+		showBoard(board)
 
 		if player == FirstPlayer {
 			player = SecondPlayer
@@ -28,7 +30,7 @@ func main() {
 	}
 }
 
-func InitBoard() [3][3]string {
+func initBoard() [3][3]string {
 	var board [3][3]string
 	for i := 0; i < 3; i++ {
 		board[i] = [3]string{"  ", "  ", "  "}
@@ -36,7 +38,7 @@ func InitBoard() [3][3]string {
 	return board
 }
 
-func ShowBoard(board [3][3]string) {
+func showBoard(board [3][3]string) {
 	fmt.Println("  |  |  |  ")
 
 	for i, row := range board {
@@ -57,7 +59,7 @@ func isValidPlace(x, y int) bool {
 	return true
 }
 
-func InputPlace(board [3][3]string) (int, int) {
+func inputPlace(board [3][3]string) (int, int) {
 	var x, y int
 	for {
 		fmt.Scanf("%d%d", &x, &y)
@@ -69,7 +71,7 @@ func InputPlace(board [3][3]string) (int, int) {
 	return x, y
 }
 
-func Place(board [3][3]string, x, y, player int) [3][3]string {
+func place(board [3][3]string, x, y, player int) [3][3]string {
 	var piece string
 	if player == FirstPlayer {
 		piece = " X"

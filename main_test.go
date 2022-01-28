@@ -79,7 +79,7 @@ var placeTests = []PlaceTestCase{
 
 func TestPlace(t *testing.T) {
 	for index, test := range placeTests {
-		actual := Place(test.board, test.x, test.y, test.player)
+		actual := place(test.board, test.x, test.y, test.player)
 
 		if len(actual) != 3 {
 			t.Fatalf("len(actual) should be 3, but actual %d\n", len(actual))
