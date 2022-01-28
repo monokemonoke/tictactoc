@@ -26,10 +26,11 @@ func TestIsValidRange(t *testing.T) {
 	for _, test := range isValidRangeTests {
 		actual := isValidRange(test.x, test.y)
 		if actual != test.expect {
-			t.Fatalf("isValidMove(%d, %d) expects %t, but got %t\n", test.x, test.y, test.expect, actual)
+			t.Fatalf("isValidRange(%d, %d) expects %t, but got %t\n", test.x, test.y, test.expect, actual)
 		}
 	}
 }
+
 
 type PlaceTestCase struct {
 	board  [3][3]string
