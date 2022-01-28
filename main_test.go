@@ -24,7 +24,7 @@ var isValidPlaceTasts = []isValidPlaceTestCase{
 
 func TestIsValidMove(t *testing.T) {
 	for _, test := range isValidPlaceTasts {
-		actual := isValidPlace(test.x, test.y)
+		actual := isValidRange(test.x, test.y)
 		if actual != test.expect {
 			t.Fatalf("isValidMove(%d, %d) expects %t, but got %t\n", test.x, test.y, test.expect, actual)
 		}

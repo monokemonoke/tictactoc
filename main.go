@@ -13,9 +13,10 @@ func main() {
 	board := initBoard()
 	showBoard(board)
 	player := FirstPlayer
+	pieceFor := map[int]string{FirstPlayer: "X", SecondPlayer: "O"}
 
 	for {
-		fmt.Printf("Player is %d now\n", player)
+		fmt.Printf(" %sを置くプレイヤーの番です\n", pieceFor[player])
 
 		x, y := inputPlace(board)
 
@@ -39,17 +40,17 @@ func initBoard() [3][3]string {
 }
 
 func showBoard(board [3][3]string) {
-	fmt.Println("  |  |  |  ")
+	fmt.Println("  | 1| 2| 3")
 
 	for i, row := range board {
 		fmt.Println("--+--+--+--")
 		line := fmt.Sprintf("%s|%s|%s", row[0], row[1], row[2])
-		line = fmt.Sprintf("%d |", i) + line
+		line = fmt.Sprintf("%d |", i+1) + line
 		fmt.Println(line)
 	}
 }
 
-func isValidPlace(x, y int) bool {
+func isValidRange(x, y int) bool {
 	if x < 1 || 3 < x {
 		return false
 	}
@@ -63,10 +64,11 @@ func inputPlace(board [3][3]string) (int, int) {
 	var x, y int
 	for {
 		fmt.Scanf("%d%d", &x, &y)
-		if isValidPlace(x, y) {
+		if isValidRange(x, y) {
 			break
 		}
 		fmt.Println("入力はそれぞれ1から3の間です")
+		fmt.Println("例:) 右上に入力したい場合は\"3 1\"と入力")
 	}
 	return x, y
 }
