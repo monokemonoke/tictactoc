@@ -31,6 +31,48 @@ func TestIsValidRange(t *testing.T) {
 	}
 }
 
+type TestCaseIsValidMove struct {
+	board  [3][3]string
+	x      int
+	y      int
+	expect bool
+}
+
+func TestIsValidMove(t *testing.T) {
+	var isValidMoveTests = []TestCaseIsValidMove{
+		{
+			board:  [3][3]string{{" ", " ", " "}, {" ", " ", " "}, {" ", " ", " "}},
+			x:      1,
+			y:      1,
+			expect: true,
+		},
+		{
+			board:  [3][3]string{{"O", " ", " "}, {" ", " ", " "}, {" ", " ", " "}},
+			x:      1,
+			y:      1,
+			expect: false,
+		},
+		{
+			board:  [3][3]string{{" ", " ", " "}, {"O", " ", " "}, {" ", " ", " "}},
+			x:      1,
+			y:      2,
+			expect: false,
+		},
+		{
+			board:  [3][3]string{{"X", " ", " "}, {" ", " ", " "}, {" ", " ", " "}},
+			x:      1,
+			y:      1,
+			expect: false,
+		},
+	}
+
+	for i, tt := range isValidMoveTests {
+		actual := isValidMove(tt.board, tt.x, tt.y)
+		if actual != tt.expect {
+			t.Errorf("CASE%d: expect %t but actual %t", i, tt.expect, actual)
+		}
+	}
+}
 
 type PlaceTestCase struct {
 	board  [3][3]string

@@ -60,6 +60,10 @@ func isValidRange(x, y int) bool {
 	return true
 }
 
+func isValidMove(board [3][3]string, x, y int) bool {
+	return board[y-1][x-1] == " "
+}
+
 func inputPlace(board [3][3]string) (int, int) {
 	var x, y int
 	for {
