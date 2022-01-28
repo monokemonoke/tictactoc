@@ -4,13 +4,13 @@ import (
 	"testing"
 )
 
-type isValidPlaceTestCase struct {
+type isValidRangeTestCase struct {
 	x      int
 	y      int
 	expect bool
 }
 
-var isValidPlaceTasts = []isValidPlaceTestCase{
+var isValidRangeTests = []isValidRangeTestCase{
 	{0, 0, false},
 	{1, 0, false},
 	{0, 1, false},
@@ -22,8 +22,8 @@ var isValidPlaceTasts = []isValidPlaceTestCase{
 	{-1, -1, false},
 }
 
-func TestIsValidMove(t *testing.T) {
-	for _, test := range isValidPlaceTasts {
+func TestIsValidRange(t *testing.T) {
+	for _, test := range isValidRangeTests {
 		actual := isValidRange(test.x, test.y)
 		if actual != test.expect {
 			t.Fatalf("isValidMove(%d, %d) expects %t, but got %t\n", test.x, test.y, test.expect, actual)
