@@ -61,18 +61,24 @@ func isValidRange(x, y int) bool {
 }
 
 func isValidMove(board [3][3]string, x, y int) bool {
-	return board[y-1][x-1] == " "
+	return board[y-1][x-1] == "  "
 }
 
 func inputPlace(board [3][3]string) (int, int) {
 	var x, y int
 	for {
 		fmt.Scanf("%d%d", &x, &y)
-		if isValidRange(x, y) {
-			break
+		if !isValidRange(x, y) {
+			fmt.Println("入力はそれぞれ1から3の間です")
+			fmt.Println("例:) 右上に入力したい場合は\"3 1\"と入力")
+			continue
 		}
-		fmt.Println("入力はそれぞれ1から3の間です")
-		fmt.Println("例:) 右上に入力したい場合は\"3 1\"と入力")
+		fmt.Println(x, y)
+		if isValidMove(board, x, y) {
+			break
+		} else {
+			fmt.Printf("(x, y) = (%d, %d) には既に%sがおかれています!\n", x, y, board[y-1][x-1])
+		}
 	}
 	return x, y
 }

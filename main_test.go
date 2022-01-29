@@ -41,25 +41,25 @@ type TestCaseIsValidMove struct {
 func TestIsValidMove(t *testing.T) {
 	var isValidMoveTests = []TestCaseIsValidMove{
 		{
-			board:  [3][3]string{{" ", " ", " "}, {" ", " ", " "}, {" ", " ", " "}},
+			board:  [3][3]string{{"  ", "  ", "  "}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
 			x:      1,
 			y:      1,
 			expect: true,
 		},
 		{
-			board:  [3][3]string{{"O", " ", " "}, {" ", " ", " "}, {" ", " ", " "}},
+			board:  [3][3]string{{" O", "  ", "  "}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
 			x:      1,
 			y:      1,
 			expect: false,
 		},
 		{
-			board:  [3][3]string{{" ", " ", " "}, {"O", " ", " "}, {" ", " ", " "}},
+			board:  [3][3]string{{"  ", "  ", "  "}, {" O", "  ", "  "}, {"  ", "  ", "  "}},
 			x:      1,
 			y:      2,
 			expect: false,
 		},
 		{
-			board:  [3][3]string{{"X", " ", " "}, {" ", " ", " "}, {" ", " ", " "}},
+			board:  [3][3]string{{" X", "  ", "  "}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
 			x:      1,
 			y:      1,
 			expect: false,
