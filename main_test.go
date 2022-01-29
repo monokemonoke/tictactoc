@@ -26,7 +26,50 @@ func TestIsValidRange(t *testing.T) {
 	for _, test := range isValidRangeTests {
 		actual := isValidRange(test.x, test.y)
 		if actual != test.expect {
-			t.Fatalf("isValidMove(%d, %d) expects %t, but got %t\n", test.x, test.y, test.expect, actual)
+			t.Fatalf("isValidRange(%d, %d) expects %t, but got %t\n", test.x, test.y, test.expect, actual)
+		}
+	}
+}
+
+type TestCaseIsValidMove struct {
+	board  [3][3]string
+	x      int
+	y      int
+	expect bool
+}
+
+func TestIsValidMove(t *testing.T) {
+	var isValidMoveTests = []TestCaseIsValidMove{
+		{
+			board:  [3][3]string{{"  ", "  ", "  "}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
+			x:      1,
+			y:      1,
+			expect: true,
+		},
+		{
+			board:  [3][3]string{{" O", "  ", "  "}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
+			x:      1,
+			y:      1,
+			expect: false,
+		},
+		{
+			board:  [3][3]string{{"  ", "  ", "  "}, {" O", "  ", "  "}, {"  ", "  ", "  "}},
+			x:      1,
+			y:      2,
+			expect: false,
+		},
+		{
+			board:  [3][3]string{{" X", "  ", "  "}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
+			x:      1,
+			y:      1,
+			expect: false,
+		},
+	}
+
+	for i, tt := range isValidMoveTests {
+		actual := isValidMove(tt.board, tt.x, tt.y)
+		if actual != tt.expect {
+			t.Errorf("CASE%d: expect %t but actual %t", i, tt.expect, actual)
 		}
 	}
 }
@@ -101,6 +144,63 @@ func TestPlace(t *testing.T) {
 					t.Fatalf("when Place(%+v,%d,%d,%d)\n", test.board, test.y, test.x, test.player)
 				}
 			}
+		}
+	}
+}
+
+func TestWinner(t *testing.T) {
+	type WinnerTestCase struct {
+		board  [3][3]string
+		expect int
+	}
+
+	tests := []WinnerTestCase{
+		{
+			board:  [3][3]string{{" X", " X", " X"}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
+			expect: FirstPlayer,
+		},
+		{
+			board:  [3][3]string{{" O", " O", " O"}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
+			expect: SecondPlayer,
+		},
+		{
+			board:  [3][3]string{{"  ", "  ", "  "}, {" X", " X", " X"}, {"  ", "  ", "  "}},
+			expect: FirstPlayer,
+		},
+		{
+			board:  [3][3]string{{"  ", "  ", "  "}, {"  ", "  ", "  "}, {" X", " X", " X"}},
+			expect: FirstPlayer,
+		},
+		{
+			board:  [3][3]string{{" X", "  ", "  "}, {" X", "  ", "  "}, {" X", "  ", "  "}},
+			expect: FirstPlayer,
+		},
+		{
+			board:  [3][3]string{{"  ", " X", "  "}, {"  ", " X", "  "}, {"  ", " X", "  "}},
+			expect: FirstPlayer,
+		},
+		{
+			board:  [3][3]string{{"  ", "  ", " X"}, {"  ", "  ", " X"}, {"  ", "  ", " X"}},
+			expect: FirstPlayer,
+		},
+		{
+			board:  [3][3]string{{" O", "  ", "  "}, {"  ", " O", "  "}, {"  ", "  ", " O"}},
+			expect: SecondPlayer,
+		},
+		{
+			board:  [3][3]string{{"  ", "  ", " O"}, {"  ", " O", "  "}, {" O", "  ", "  "}},
+			expect: SecondPlayer,
+		},
+		{
+			board:  [3][3]string{{"  ", "  ", " O"}, {"  ", "  ", "  "}, {" O", "  ", "  "}},
+			expect: Draw,
+		},
+	}
+
+	for i, tt := range tests {
+		actual := winner(tt.board)
+		if actual != tt.expect {
+			t.Errorf("CASE%d: expect %d, actual %d", i, tt.expect, actual)
 		}
 	}
 }
