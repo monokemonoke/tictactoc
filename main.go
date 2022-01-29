@@ -5,8 +5,9 @@ import (
 )
 
 const (
-	FirstPlayer  = 1
-	SecondPlayer = 2
+	FirstPlayer  = 1 // X で打つプレイヤー
+	SecondPlayer = 2 // O で打つプレイヤー
+	Draw         = 2 // 引き分け
 )
 
 func main() {
