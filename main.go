@@ -23,6 +23,9 @@ func main() {
 
 		board = place(board, x, y, player)
 		showBoard(board)
+		if isFinish(board) {
+			break
+		}
 
 		if player == FirstPlayer {
 			player = SecondPlayer
@@ -30,6 +33,7 @@ func main() {
 			player = FirstPlayer
 		}
 	}
+
 }
 
 func initBoard() [3][3]string {
@@ -94,4 +98,15 @@ func place(board [3][3]string, x, y, player int) [3][3]string {
 
 	board[y-1][x-1] = piece
 	return board
+}
+
+func isFinish(board [3][3]string) bool {
+	for _, row := range board {
+		for _, v := range row {
+			if v == " " {
+				return false
+			}
+		}
+	}
+	return true
 }
