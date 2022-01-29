@@ -147,3 +147,60 @@ func TestPlace(t *testing.T) {
 		}
 	}
 }
+
+func TestWinner(t *testing.T) {
+	type WinnerTestCase struct {
+		board  [3][3]string
+		expect int
+	}
+
+	tests := []WinnerTestCase{
+		{
+			board:  [3][3]string{{" X", " X", " X"}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
+			expect: FirstPlayer,
+		},
+		{
+			board:  [3][3]string{{" O", " O", " O"}, {"  ", "  ", "  "}, {"  ", "  ", "  "}},
+			expect: SecondPlayer,
+		},
+		{
+			board:  [3][3]string{{"  ", "  ", "  "}, {" X", " X", " X"}, {"  ", "  ", "  "}},
+			expect: FirstPlayer,
+		},
+		{
+			board:  [3][3]string{{"  ", "  ", "  "}, {"  ", "  ", "  "}, {" X", " X", " X"}},
+			expect: FirstPlayer,
+		},
+		{
+			board:  [3][3]string{{" X", "  ", "  "}, {" X", "  ", "  "}, {" X", "  ", "  "}},
+			expect: FirstPlayer,
+		},
+		{
+			board:  [3][3]string{{"  ", " X", "  "}, {"  ", " X", "  "}, {"  ", " X", "  "}},
+			expect: FirstPlayer,
+		},
+		{
+			board:  [3][3]string{{"  ", "  ", " X"}, {"  ", "  ", " X"}, {"  ", "  ", " X"}},
+			expect: FirstPlayer,
+		},
+		{
+			board:  [3][3]string{{" O", "  ", "  "}, {"  ", " O", "  "}, {"  ", "  ", " O"}},
+			expect: SecondPlayer,
+		},
+		{
+			board:  [3][3]string{{"  ", "  ", " O"}, {"  ", " O", "  "}, {" O", "  ", "  "}},
+			expect: SecondPlayer,
+		},
+		{
+			board:  [3][3]string{{"  ", "  ", " O"}, {"  ", "  ", "  "}, {" O", "  ", "  "}},
+			expect: Draw,
+		},
+	}
+
+	for i, tt := range tests {
+		actual := winner(tt.board)
+		if actual != tt.expect {
+			t.Errorf("CASE%d: expect %d, actual %d", i, tt.expect, actual)
+		}
+	}
+}
